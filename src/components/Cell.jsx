@@ -1,8 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { ReactSVG } from "react-svg";
+import CellState from "../enums/CellState";
+import "./Cell.scss";
 
 function Cell(props) {
-  return <div onClick={() => props.changeCellValue(props.x, props.y)}>{props.value}</div>;
+  let icon = "";
+  if (props.value === CellState.X) {
+    icon = "images/close.svg";
+  } else if (props.value === CellState.O) {
+    icon = "images/circle.svg";
+  }
+
+  return (
+    <ReactSVG
+      className="icon"
+      src={icon}
+      onClick={() => props.changeCellValue(props.x, props.y)}
+    />
+  );
 }
 
 Cell.propTypes = {
