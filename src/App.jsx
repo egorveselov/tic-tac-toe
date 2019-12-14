@@ -9,9 +9,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      playerTurn: 0,
       fieldSize: DEFAULT_FIELD_SIZE,
       fieldArray: this.createArray(DEFAULT_FIELD_SIZE)
     };
+
+    this.onCellClick = this.onCellClick.bind(this);
   }
 
   createArray(fieldSize) {
@@ -29,7 +32,11 @@ class App extends React.Component {
   }
 
   onCellClick(x, y) {
-    console.log(`x: ${x}; y: ${y}`);
+    const { playerTurn, fieldArray } = this.state;
+
+    const targetCellState = playerTurn === 0 ? CellState.X : CellState.O;
+    fieldArray[x][y] = targetCellState;
+    this.setState({ fieldArray: fieldArray, playerTurn: 1 - playerTurn });
   }
 
   render() {
