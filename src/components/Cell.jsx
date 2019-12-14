@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Cell(props) {
-  return <div onClick={props.changeCellValue(props.x, props.y)}>{props.value}</div>;
+  return <div onClick={() => props.changeCellValue(props.x, props.y)}>{props.value}</div>;
 }
 
 Cell.propTypes = {
