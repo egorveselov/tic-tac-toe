@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import GameField from "./components/GameField";
 import CellState from "./enums/CellState";
 
@@ -33,6 +33,10 @@ class App extends React.Component {
 
   onCellClick(x, y) {
     const { playerTurn, fieldArray } = this.state;
+
+    if (fieldArray[x][y] !== CellState.EMPTY) {
+      return;
+    }
 
     const targetCellState = playerTurn === 0 ? CellState.X : CellState.O;
     fieldArray[x][y] = targetCellState;
