@@ -1,12 +1,8 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<g>
-	<g>
-		<path d="M256,0C114.618,0,0,114.618,0,256s114.618,256,256,256s256-114.618,256-256S397.382,0,256,0z M256,469.333
-			c-117.818,0-213.333-95.515-213.333-213.333S138.182,42.667,256,42.667S469.333,138.182,469.333,256S373.818,469.333,256,469.333z
-			"/>
-	</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30pt" height="30pt" viewBox="0 0 30 30" version="1.1">
+<g id="surface1">
+<rect x="0" y="0" width="30" height="30" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
+<path style="fill:none;stroke-width:14.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 80.494792 49.947917 C 80.494792 32.005208 67.291667 17.447917 51.002604 17.447917 C 34.713542 17.447917 21.497396 32.005208 21.497396 49.947917 C 21.497396 67.903646 34.713542 82.447917 51.002604 82.447917 C 67.291667 82.447917 80.494792 67.903646 80.494792 49.947917 Z M 80.494792 49.947917 " transform="matrix(0.3,0,0,0.3,0,0)"/>
+<path style="fill:none;stroke-width:13.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 31.497396 25.455729 C 31.497396 25.455729 32.018229 25.299479 32.578125 24.453125 C 33.854167 22.552083 37.252604 22.109375 40.169271 20.455729 C 42.773438 18.971354 44.505208 17.447917 45.585938 16.458333 C 46.666667 15.455729 47.330729 15.377604 47.747396 14.453125 C 48.333333 13.151042 49.153646 13.164062 49.921875 12.447917 C 50.677083 11.744792 51.315104 12.161458 52.083333 11.458333 C 52.851562 10.742188 54.244792 10.455729 55.338542 10.455729 L 56.419271 9.453125 L 57.5 9.453125 L 57.5 8.450521 " transform="matrix(0.3,0,0,0.3,0,0)"/>
 </g>
 </svg>
