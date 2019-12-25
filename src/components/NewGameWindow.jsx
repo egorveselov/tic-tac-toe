@@ -1,34 +1,45 @@
-import React from "react";
-import Modal from "react-modal";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../actions/actions";
 import CellState from "../enums/CellState";
 
-Modal.setAppElement("#root");
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 function NewGameWindow() {
   const dispatch = useDispatch();
   const showNewGame = useSelector(state => state.modalReducer.showNewGame);
 
-  let fieldSize = 3;
-  let chainLength = 3;
-  let playerOneName = "";
-  let playerTwoName = "";
+  const [fieldSize, setFieldSize] = useState(3);
+  const [chainLength, setChainLength] = useState(3);
+  const [playerOne, setPlayerOne] = useState("");
+  const [playerTwo, setPlayerTwo] = useState("");
 
   const handleChange = event => {
     const target = event.target;
     switch (target.name) {
       case "fieldSize":
-        fieldSize = target.value;
+        setFieldSize(target.value);
         break;
       case "chainLength":
-        chainLength = target.value;
+        setChainLength(target.value);
         break;
       case "playerOneName":
-        playerOneName = target.value;
+        setPlayerOne(target.value);
         break;
       case "playerTwoName":
-        playerTwoName = target.value;
+        setPlayerTwo(target.value);
         break;
       default:
         break;
@@ -61,19 +72,22 @@ function NewGameWindow() {
         createArray(fieldSize),
         fieldSize,
         chainLength,
-        { name: playerOneName, sign: info[0] },
-        { name: playerTwoName, sign: info[1] },
+        { name: playerOne, sign: info[0] },
+        { name: playerTwo, sign: info[1] },
         1
       )
     );
     dispatch(actions.changeNewGameState(false));
+
+    setPlayerOne("");
+    setPlayerTwo("");
   };
 
   const checkParams = () => {
     const result =
       fieldSize >= chainLength
-        ? playerOneName !== ""
-          ? playerTwoName !== ""
+        ? playerOne !== ""
+          ? playerTwo !== ""
             ? true
             : false
           : false
@@ -90,32 +104,69 @@ function NewGameWindow() {
     return info;
   };
 
+  const useStyles = makeStyles(theme => ({
+    formControl: {
+      margin: theme.spacing(1),
+      width: 200
+    }
+  }));
+
+  const classes = useStyles();
+
   return (
-    <Modal isOpen={showNewGame}>
-      <div>
-        <h1>Game parameters</h1>
-        <h3>Choose field size:</h3>
-        <select name="fieldSize" onChange={handleChange}>
-          <option value="3">3x3</option>
-          <option value="9">9x9</option>
-          <option value="27">27x27</option>
-        </select>
-        <div>Choose length of chain</div>
-        <select name="chainLength" onChange={handleChange}>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <div>Enter name of first player</div>
-        <input name="playerOneName" type="text" onChange={handleChange} />
-        <div>Enter name of second player</div>
-        <input name="playerTwoName" type="text" onChange={handleChange} />
-        <button onClick={startNewGame}>Start </button>
-        <button onClick={() => dispatch(actions.changeNewGameState(false))}>
-          Cancel{" "}
-        </button>
-      </div>
-    </Modal>
+    <Dialog open={showNewGame}>
+      <DialogTitle id="form-dialog-title">Game parameters</DialogTitle>
+      <DialogContent>
+        <DialogContentText>Please choose game settings.</DialogContentText>
+        <FormControl className={classes.formControl}>
+          <InputLabel>Field size</InputLabel>
+          <Select
+            autoWidth
+            name="fieldSize"
+            value={fieldSize}
+            onChange={handleChange}
+          >
+            <MenuItem value={3}>3x3</MenuItem>
+            <MenuItem value={9}>9x9</MenuItem>
+            <MenuItem value={27}>27x27</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel>Chain length</InputLabel>
+          <Select
+            name="chainLength"
+            value={chainLength}
+            onChange={handleChange}
+          >
+            <MenuItem value={3}>3</MenuItem>
+            <MenuItem value={4}>4</MenuItem>
+            <MenuItem value={5}>5</MenuItem>
+          </Select>
+        </FormControl>
+        <Grid container spacing={0}>
+          <Grid item xs={6}>
+            <form noValidate autoComplete="off" className={classes.formControl}>
+              <TextField
+                name="playerOneName"
+                label="First player"
+                onChange={handleChange}
+              />
+            </form>
+          </Grid>
+          <Grid item xs={6}>
+            <form noValidate autoComplete="off" className={classes.formControl}>
+              <TextField
+                name="playerTwoName"
+                label="Second player"
+                onChange={handleChange}
+              />
+            </form>
+          </Grid>
+        </Grid>
+        <Button onClick={startNewGame}>Start</Button>
+      </DialogContent>
+      <DialogActions></DialogActions>
+    </Dialog>
   );
 }
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ReactSVG } from "react-svg";
 import CellState from "../enums/CellState";
 import * as actions from "../actions/actions";
 import "./Cell.scss";
@@ -123,10 +122,10 @@ function Cell(props) {
     }
     let nextTurn;
     if (whoseTurn === CellState.X) {
-      fieldArray[x][y] = "images/cross.svg";
+      fieldArray[x][y] = "images/cross.png";
       nextTurn = CellState.O;
     } else {
-      fieldArray[x][y] = "images/circle.svg";
+      fieldArray[x][y] = "images/circle.png";
       nextTurn = CellState.X;
     }
 
@@ -137,11 +136,9 @@ function Cell(props) {
   };
 
   return (
-    <ReactSVG
-      className="icon"
-      src={fieldArray[props.x][props.y]}
-      onClick={() => onCellClick(props.x, props.y)}
-    />
+    <div onClick={() => onCellClick(props.x, props.y)}>
+      <img src={fieldArray[props.x][props.y]} alt="" />
+    </div>
   );
 }
 

@@ -2,7 +2,7 @@ import * as types from "../actions/actionTypes";
 import CellState from "../enums/CellState";
 
 const initialState = {
-  fieldArray: [],
+  fieldArray: [["", "", ""], ["", "", ""], ["", "", ""]],
   whoseTurn: CellState.X,
   playerOne: {
     name: "",

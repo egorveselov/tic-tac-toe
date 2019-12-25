@@ -1,13 +1,4 @@
 #grid {
-  display: grid;
-  grid-template-rows: 100px 100px 100px;
-  grid-template-columns: 100px 100px 100px;
-  grid-gap: 0.2vw;
-  background-color: black;
-  width: 300px;
-}
-
-#grid {
   div {
     font-size: 2vw;
     background: white;
