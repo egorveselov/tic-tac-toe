@@ -16,6 +16,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 function NewGameWindow() {
   const dispatch = useDispatch();
@@ -25,20 +26,35 @@ function NewGameWindow() {
   const [chainLength, setChainLength] = useState(3);
   const [playerOne, setPlayerOne] = useState("");
   const [playerTwo, setPlayerTwo] = useState("");
+  const [errorOneState, setErrorOneState] = useState(false);
+  const [errorTwoState, setErrorTwoState] = useState(false);
+  const [errorChainLength, setErrorChainLength] = useState(false);
 
   const handleChange = event => {
     const target = event.target;
     switch (target.name) {
       case "fieldSize":
         setFieldSize(target.value);
+        target.value >= chainLength
+          ? setErrorChainLength(false)
+          : setErrorChainLength(true);
         break;
       case "chainLength":
         setChainLength(target.value);
+        target.value > fieldSize
+          ? setErrorChainLength(true)
+          : setErrorChainLength(false);
         break;
       case "playerOneName":
+        if (setErrorOneState) {
+          setErrorOneState(false);
+        }
         setPlayerOne(target.value);
         break;
       case "playerTwoName":
+        if (errorTwoState) {
+          setErrorTwoState(false);
+        }
         setPlayerTwo(target.value);
         break;
       default:
@@ -84,14 +100,21 @@ function NewGameWindow() {
   };
 
   const checkParams = () => {
-    const result =
-      fieldSize >= chainLength
-        ? playerOne !== ""
-          ? playerTwo !== ""
-            ? true
-            : false
-          : false
-        : false;
+    let result = true;
+
+    if (playerOne === "") {
+      result = false;
+      setErrorOneState(true);
+    }
+
+    if (playerTwo === "") {
+      result = false;
+      setErrorTwoState(true);
+    }
+
+    if (fieldSize < chainLength) {
+      result = false;
+    }
     return result;
   };
 
@@ -131,7 +154,7 @@ function NewGameWindow() {
             <MenuItem value={27}>27x27</MenuItem>
           </Select>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classes.formControl} error={errorChainLength}>
           <InputLabel>Chain length</InputLabel>
           <Select
             name="chainLength"
@@ -142,6 +165,11 @@ function NewGameWindow() {
             <MenuItem value={4}>4</MenuItem>
             <MenuItem value={5}>5</MenuItem>
           </Select>
+          <FormHelperText>
+            {errorChainLength === true
+              ? "Length is bigger than field size"
+              : ""}
+          </FormHelperText>
         </FormControl>
         <Grid container spacing={0}>
           <Grid item xs={6}>
@@ -149,6 +177,9 @@ function NewGameWindow() {
               <TextField
                 name="playerOneName"
                 label="First player"
+                required
+                error={errorOneState}
+                helperText={errorOneState === true ? "Empty field" : ""}
                 onChange={handleChange}
               />
             </form>
@@ -158,6 +189,9 @@ function NewGameWindow() {
               <TextField
                 name="playerTwoName"
                 label="Second player"
+                required
+                error={errorTwoState}
+                helperText={errorTwoState === true ? "Empty field" : ""}
                 onChange={handleChange}
               />
             </form>
