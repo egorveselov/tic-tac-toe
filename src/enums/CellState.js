@@ -1,7 +1,7 @@
 const CellState = {
     EMPTY: "",
     X: "X",
-    O: "O",
+    O: "Z",
 }
 
 export default CellState;
